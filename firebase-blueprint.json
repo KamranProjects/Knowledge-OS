@@ -1,0 +1,58 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "weakSubjects": { "type": "string" },
+        "learningStyle": { "type": "string" },
+        "goal": { "type": "string" },
+        "experienceLevel": { "type": "string" },
+        "language": { "type": "string" },
+        "dailyTime": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["email", "createdAt"]
+    },
+    "Source": {
+      "title": "Study Source",
+      "description": "User uploaded knowledge source",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "content": { "type": "string" },
+        "type": { "type": "string" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["id", "name", "content", "type", "createdAt"]
+    },
+    "LearningPlan": {
+      "title": "Learning Plan",
+      "description": "User learning plan and modules",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "modules": { "type": "array" }
+      },
+      "required": ["id", "title", "modules"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "User" },
+      "description": "Stores user profiles"
+    },
+    "/sources/{sourceId}": {
+      "schema": { "$ref": "Source" },
+      "description": "Stores user study sources"
+    },
+    "/learningPlans/{planId}": {
+      "schema": { "$ref": "LearningPlan" },
+      "description": "Stores user learning plans"
+    }
+  }
+}

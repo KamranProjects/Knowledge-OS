@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-canvas: #F5F0EB;
+  --color-surface: #FAF7F4;
+  --color-sidebar: #EDE8E3;
+  --color-coral: #D97757;
+  --color-coral-hover: #C4613E;
+  --color-border-subtle: #E5DFD9;
+  --color-border-strong: #C8BFB6;
+  --color-text-primary: #1A1714;
+  --color-text-secondary: #5C5650;
+  --color-text-muted: #9B948D;
+
+  /* Claude Bubble Radii */
+  --radius-ai-bubble: 4px 16px 16px 16px;
+  --radius-user-bubble: 16px 4px 16px 16px;
+}
+
+@layer base {
+  body {
+    background: var(--color-canvas);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, .font-serif {
+    font-family: var(--font-serif);
+  }
+
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
+}
+
+/* Animations */
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes bounceDot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.35; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+.animate-msg-in {
+  animation: msgIn 0.22s ease both;
+}
+
+.dot-bounce {
+  animation: bounceDot 1.2s infinite;
+}
+
+/* Transitions */
+.page-transition {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Markdown styling */
+.markdown-body {
+  line-height: 1.65;
+  font-size: 14.5px;
+}
+
+.markdown-body p {
+  margin-bottom: 0.8em;
+}
+
+.markdown-body h1, .markdown-body h2, .markdown-body h3 {
+  font-family: var(--font-serif);
+  margin-top: 1.2em;
+  margin-bottom: 0.4em;
+  color: var(--color-text-primary);
+  line-height: 1.2;
+}
+
+.markdown-body ul, .markdown-body ol {
+  padding-left: 1.25em;
+  margin-bottom: 0.8em;
+}
+
+.markdown-body li {
+  margin-bottom: 0.3em;
+}
+
+.markdown-body code {
+  font-family: var(--font-mono);
+  background: var(--color-sidebar);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.markdown-body blockquote {
+  border-left: 3px solid var(--color-coral);
+  padding-left: 1em;
+  color: var(--color-text-secondary);
+  font-style: italic;
+  margin: 1.2em 0;
+}

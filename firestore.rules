@@ -1,0 +1,33 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helpers
+    function isSignedIn() { return request.auth != null; }
+    function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); }
+    
+    function isValidUser(data) {
+        return data.email is string && data.email.size() <= 256 &&
+               data.weakSubjects is string && data.weakSubjects.size() <= 1024 &&
+               data.learningStyle is string && data.learningStyle.size() <= 1024 &&
+               data.goal is string && data.goal.size() <= 1024 &&
+               data.experienceLevel is string && data.experienceLevel.size() <= 64 &&
+               data.language is string && data.language.size() <= 64 &&
+               data.dailyTime is string && data.dailyTime.size() <= 64 &&
+               data.createdAt is timestamp;
+    }
+
+    // Global Safety Net - Default Deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+    
+    // User Profiles
+    match /users/{userId} {
+      // Allow user to read their own profile
+      allow get: if isSignedIn() && request.auth.uid == userId;
+      // Allow user to write/update their own profile with validation
+      allow create, update: if isSignedIn() && request.auth.uid == userId && isValidUser(request.resource.data);
+    }
+  }
+}

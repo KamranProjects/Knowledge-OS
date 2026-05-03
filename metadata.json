@@ -1,0 +1,9 @@
+{
+  "name": "AI Study OS",
+  "description": "A Google-native AI study operating system that transforms learning materials into structured knowledge, flashcards, and interactive exams.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "majorCapabilities": []
+}
