@@ -4,7 +4,9 @@
     "noEmit": false,
     "allowImportingTsExtensions": false,
     "outDir": "dist",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": ["server.ts", "ragService.ts"]
 }
