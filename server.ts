@@ -4,7 +4,7 @@ import path from "path";
 import fs from "fs";
 import multer from "multer";
 import vision from "@google-cloud/vision";
-import { ingestDocument, queryRAG, clearStore } from "./ragService";
+import { ingestDocument, queryRAG, clearStore } from "./ragService.js";
 
 // Types for OCR response
 interface OCRResponse {
@@ -349,7 +349,7 @@ async function startServer() {
         console.log(`Gemini Vision extracted ${text.length} chars.`);
       }
 
-      const { ingestDocument } = await import("./ragService");
+      const { ingestDocument } = await import("./ragService.js");
       const apiKey = (req.headers["x-gemini-key"] as string || process.env.GEMINI_API_KEY)?.trim();
       await ingestDocument(fileName, text || "[Empty Document]", "knowledge", apiKey);
 
